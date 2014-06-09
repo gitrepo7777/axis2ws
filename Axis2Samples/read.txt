@@ -1,0 +1,8 @@
+To run AddressBookADBClient.java
+
+http://localhost:8080/axis2/services/AddressBookService?wsdl
+
+save as this wdl to the src directory.
+use the Axis2 code generator (plugin) to generate java classes from wsdl.
+I have moofidies the  AddressBookADBClient.java code to refer the classes to appropriate packages.
+run java program.

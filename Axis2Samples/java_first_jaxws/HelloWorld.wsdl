@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://server.hw.demo" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://server.hw.demo/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://server.hw.demo/">
+    <wsdl:documentation>javafirst</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://server.hw.demo">
+            <xs:element name="sayHi">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="text" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHiResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="sayHiRequest">
+        <wsdl:part name="parameters" element="ns:sayHi"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiResponse">
+        <wsdl:part name="parameters" element="ns:sayHiResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="HelloWorldPortType">
+        <wsdl:operation name="sayHi">
+            <wsdl:input message="tns:sayHiRequest" wsaw:Action="urn:sayHi"/>
+            <wsdl:output message="tns:sayHiResponse" wsaw:Action="urn:sayHiResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="HelloWorldSoap11Binding" type="tns:HelloWorldPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sayHi">
+            <soap:operation soapAction="urn:sayHi" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="HelloWorldSoap12Binding" type="tns:HelloWorldPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sayHi">
+            <soap12:operation soapAction="urn:sayHi" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="HelloWorldHttpBinding" type="tns:HelloWorldPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="sayHi">
+            <http:operation location="sayHi"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="HelloWorld">
+        <wsdl:port name="HelloWorldHttpSoap11Endpoint" binding="tns:HelloWorldSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/HelloWorld.HelloWorldHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="HelloWorldHttpSoap12Endpoint" binding="tns:HelloWorldSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/HelloWorld.HelloWorldHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="HelloWorldHttpEndpoint" binding="tns:HelloWorldHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/HelloWorld.HelloWorldHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

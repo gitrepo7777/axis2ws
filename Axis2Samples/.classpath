@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="pojo/src"/>
+	<classpathentry kind="src" path="pojo/gen-src/src"/>
+	<classpathentry kind="src" path="mtom/resources"/>
+	<classpathentry kind="src" path="mtom/src"/>
+	<classpathentry kind="src" path="soapwithattachments/resources"/>
+	<classpathentry kind="src" path="soapwithattachments/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AXIS2_LIB"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
